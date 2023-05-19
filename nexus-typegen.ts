@@ -18,6 +18,7 @@ export interface NexusGenInputs {
     back?: NexusGenEnums['Sort'] | null; // Sort
     createdAt?: NexusGenEnums['Sort'] | null; // Sort
     front?: NexusGenEnums['Sort'] | null; // Sort
+    isDone?: NexusGenEnums['Sort'] | null; // Sort
   }
 }
 
@@ -42,6 +43,7 @@ export interface NexusGenObjects {
     back: string; // String!
     front: string; // String!
     id: number; // Int!
+    isDone: boolean; // Boolean!
   }
   Mutation: {};
   Query: {};
@@ -71,11 +73,13 @@ export interface NexusGenFieldTypes {
     back: string; // String!
     front: string; // String!
     id: number; // Int!
+    isDone: boolean; // Boolean!
     owner: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
     create: NexusGenRootTypes['FlashCard']; // FlashCard!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    markAsRead: NexusGenRootTypes['FlashCard']; // FlashCard!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
   }
   Query: { // field return type
@@ -98,11 +102,13 @@ export interface NexusGenFieldTypeNames {
     back: 'String'
     front: 'String'
     id: 'Int'
+    isDone: 'Boolean'
     owner: 'User'
   }
   Mutation: { // field return type name
     create: 'FlashCard'
     login: 'AuthPayload'
+    markAsRead: 'FlashCard'
     signup: 'AuthPayload'
   }
   Query: { // field return type name
@@ -126,10 +132,18 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
     }
+    markAsRead: { // args
+      id: number; // Int!
+    }
     signup: { // args
       email: string; // String!
       fullName: string; // String!
       password: string; // String!
+    }
+  }
+  Query: {
+    cards: { // args
+      orderBy?: NexusGenInputs['FlashCardOrderByInput'][] | null; // [FlashCardOrderByInput!]
     }
   }
 }

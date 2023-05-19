@@ -11,6 +11,7 @@ type FlashCard {
   back: String!
   front: String!
   id: Int!
+  isDone: Boolean!
   owner: User!
 }
 
@@ -18,16 +19,18 @@ input FlashCardOrderByInput {
   back: Sort
   createdAt: Sort
   front: Sort
+  isDone: Sort
 }
 
 type Mutation {
   create(back: String!, front: String!): FlashCard!
   login(email: String!, password: String!): AuthPayload!
+  markAsRead(id: Int!): FlashCard!
   signup(email: String!, fullName: String!, password: String!): AuthPayload!
 }
 
 type Query {
-  cards: [FlashCard!]!
+  cards(orderBy: [FlashCardOrderByInput!]): [FlashCard!]!
 }
 
 enum Sort {

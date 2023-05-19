@@ -12,6 +12,7 @@ model FlashCard {
   createdAt DateTime @default(now())
   front     String
   back      String
+  isDone    Boolean?
   owner     User?    @relation(fields: [ownerId], references: [id])
   ownerId   Int?
 }
